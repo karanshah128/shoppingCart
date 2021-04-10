@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useGlobalState from '../../../Context';
 import Spinner from 'react-spinner-material';
-import { showAlert, cookies, validUsername, validPassword } from '../../../Common/CommonAlert';
+import { showAlert, cookies, validUsername, validPassword, showSuccess } from '../../../Common/CommonAlert';
 import { setLoginName, setAuth } from '../../../reducer/action'
 import "../../../css/main.css";
 import "../../../css/react-confirm-alert.css";
@@ -11,8 +11,8 @@ import "../Css/Login.css";
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
-  const [userName, setUserName] = useState('Admin123')
-  const [passwords, setPasswords] = useState('P@ssw0rd')
+  const [userName, setUserName] = useState()//Admin123
+  const [passwords, setPasswords] = useState()//P@ssw0rd
   const history = useHistory()
   const [{ }, dispatch] = useGlobalState()
 
@@ -49,6 +49,7 @@ const Login = () => {
               cookies('User_name', userName, 1)
               cookies('Pass_word', passwords, 1)
               dispatch(setLoginName(userName))
+              showSuccess("You have successfully logged in.")
               history.push("/Home")
             
           }
